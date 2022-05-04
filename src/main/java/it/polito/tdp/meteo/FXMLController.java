@@ -7,6 +7,7 @@ package it.polito.tdp.meteo;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.meteo.model.Citta;
 import it.polito.tdp.meteo.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,6 +39,13 @@ public class FXMLController {
 
     @FXML
     void doCalcolaSequenza(ActionEvent event) {
+    	Integer mese= this.boxMese.getValue();
+    	String s="";
+    	for(Citta c :model.trovaSequenza(mese)) {
+    		s+=c.getNome()+"  ";
+    	}
+    	this.txtResult.appendText(s);
+    	
 
     }
 
@@ -46,14 +54,15 @@ public class FXMLController {
     	
     	Integer mese= this.boxMese.getValue();
     	
-    	for(String s: this.model.getAllCitta()) {
-    		String ss= Integer.toString(this.model.getUmiditaMedia(mese, s));
+    	for(Citta c: this.model.getAllCitta()) {
+    		String ss= Integer.toString(this.model.getUmiditaMedia(mese, c.getNome()));
     		
     		this.txtResult.appendText(ss+"\n");
     	}
 
     }
 
+    
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert boxMese != null : "fx:id=\"boxMese\" was not injected: check your FXML file 'Scene.fxml'.";

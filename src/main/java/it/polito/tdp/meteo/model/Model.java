@@ -33,7 +33,9 @@ public class Model {
 		return this.meteo.getMediaUmiditaLocalitaMese(mese, localita);
 	}
 
-	
+	public List<Citta> getAllCitta(){
+		return this.meteo.getAllCitta();
+	}
 	
 
 	// of course you can change the String output with what you think works best
